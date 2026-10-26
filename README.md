@@ -99,3 +99,22 @@
 The model now differentiates risk across machine types, enabling targeted maintenance, reducing downtime, and lowering costs. 
 With minimal implementation effort, this model provides measurable operational and financial benefits.
 We recommend deploying it immediately as the backbone of a proactive maintenance strategy.”
+
+---
+
+## LLM Ranking: Structured Data Processing
+
+`LLM_Structured_Data_Ranking.ipynb` benchmarks and ranks LLMs on structured-data tasks built from the same AI4I 2020 machine data. Every item has a ground truth computed from the data, so scoring is fully automatic.
+
+| Module | Purpose |
+|---|---|
+| 1. Configuration | Seed, items per task, task weights, paths |
+| 2. Data | AI4I 2020 loader (local CSV → KaggleHub → seeded synthetic fallback) |
+| 3. Task suite | Log → JSON extraction, table QA, CSV → JSON transformation, text-to-SQL, rule-based failure classification |
+| 4. Model registry & adapters | Anthropic SDK plus any OpenAI-compatible endpoint (OpenAI, Gemini, OpenRouter, Groq, Together, Mistral, DeepSeek, xAI, Ollama), plus calibration baselines |
+| 5. Execution engine | Parallel calls, on-disk response cache, latency/token/cost tracking |
+| 6. Scoring | JSON recovery, JSON-Schema validation, field/set metrics, sandboxed SQL execution |
+| 7. Ranking | Weighted composite, bootstrap 95% CIs, rank probabilities, Bradley–Terry ratings, tiers |
+| 8. Reporting | Leaderboard, task heatmap, cost-vs-quality Pareto chart, CSV/Markdown export |
+
+Set provider keys before running, for example `ANTHROPIC_API_KEY`, or `OPENROUTER_API_KEY` with `OPENROUTER_MODELS="vendor/model-a,vendor/model-b"`. Module 4 has the full list. With no keys set, only the calibration baselines run, which checks the pipeline end to end.
