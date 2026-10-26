@@ -1,6 +1,5 @@
-llm_bench_cache/
-llm_bench_results/
 .ipynb_checkpoints/
-data/
+data/*
+!data/ai4i2020_sample.csv
 models/
 results/

@@ -102,24 +102,6 @@ We recommend deploying it immediately as the backbone of a proactive maintenance
 
 ---
 
-## LLM Ranking: Structured Data Processing (30 ML Algorithm Modules)
-
-`LLM_Structured_Data_Ranking.ipynb` ranks LLMs on how accurately they carry out 30 core machine-learning algorithms by hand on structured data drawn from the same AI4I 2020 machine dataset. Each module generates small, fully specified problems. Reference answers come from scikit-learn or NumPy, so scoring is automatic.
-
-| Family | Modules |
-|---|---|
-| Supervised | Linear Regression, Logistic Regression, Decision Tree, Random Forest, SVM, k-NN, Naive Bayes, Gradient Boosting, AdaBoost, XGBoost |
-| Unsupervised | k-Means, Hierarchical Clustering, DBSCAN, PCA, t-SNE, K-Means++, Isolation Forest |
-| Reinforcement learning | Q-Learning, SARSA, DQN, Policy Gradient, Actor-Critic, Markov Decision Process |
-| Deep learning | ANN, CNN, RNN, LSTM, Transformer, Autoencoder |
-| Evolutionary | Genetic Algorithm |
-
-Models are ranked by a weighted composite with bootstrap 95% CIs, rank probabilities, Bradley–Terry ratings, and tiers. The notebook also reports per-family and per-module scores, a cost-vs-quality chart, and CSV/Markdown exports.
-
-Set provider keys before running, for example `ANTHROPIC_API_KEY`, or `OPENROUTER_API_KEY` with `OPENROUTER_MODELS="vendor/model-a,vendor/model-b"`. Section 4 of the notebook has the full list (OpenAI, Gemini, Groq, Together, Mistral, DeepSeek, xAI, Ollama). With no keys set, only the calibration baselines run, which checks the pipeline end to end.
-
----
-
 ## End-to-End ML Pipeline: 30 Algorithms on AI4I 2020
 
 `Manufacturing_ML_Pipeline_30_Algorithms.ipynb` downloads the free [AI4I 2020 Predictive Maintenance Dataset](https://archive.ics.uci.edu/dataset/601/ai4i+2020+predictive+maintenance+dataset) from UCI and applies every algorithm in a full ML workflow:
@@ -135,3 +117,5 @@ Set provider keys before running, for example `ANTHROPIC_API_KEY`, or `OPENROUTE
 9. **Summary**: all 30 algorithms ranked within their stage.
 
 Set `FAST_MODE=1` for a quick run.
+
+**Running without internet access to UCI:** `data/ai4i2020_sample.csv` is an evaluation sample produced by `generate_ai4i_sample.py`, which re-implements the dataset's documented generation process (AI4I 2020 is itself synthetic). The notebook uses it automatically when the original file can't be downloaded, or always when `DATA_MODE=sample` is set. The sample has the same columns, value ranges and failure rules, but it is not the original file, so results on it evaluate the pipeline rather than the published data.
