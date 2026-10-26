@@ -1,5 +1,3 @@
-llm_bench_cache/
-llm_bench_results/
 .ipynb_checkpoints/
 data/
 models/
