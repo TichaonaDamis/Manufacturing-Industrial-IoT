@@ -102,19 +102,18 @@ We recommend deploying it immediately as the backbone of a proactive maintenance
 
 ---
 
-## LLM Ranking: Structured Data Processing
+## LLM Ranking: Structured Data Processing (30 ML Algorithm Modules)
 
-`LLM_Structured_Data_Ranking.ipynb` benchmarks and ranks LLMs on structured-data tasks built from the same AI4I 2020 machine data. Every item has a ground truth computed from the data, so scoring is fully automatic.
+`LLM_Structured_Data_Ranking.ipynb` ranks LLMs on how accurately they carry out 30 core machine-learning algorithms by hand on structured data drawn from the same AI4I 2020 machine dataset. Each module generates small, fully specified problems. Reference answers come from scikit-learn or NumPy, so scoring is automatic.
 
-| Module | Purpose |
+| Family | Modules |
 |---|---|
-| 1. Configuration | Seed, items per task, task weights, paths |
-| 2. Data | AI4I 2020 loader (local CSV → KaggleHub → seeded synthetic fallback) |
-| 3. Task suite | Log → JSON extraction, table QA, CSV → JSON transformation, text-to-SQL, rule-based failure classification |
-| 4. Model registry & adapters | Anthropic SDK plus any OpenAI-compatible endpoint (OpenAI, Gemini, OpenRouter, Groq, Together, Mistral, DeepSeek, xAI, Ollama), plus calibration baselines |
-| 5. Execution engine | Parallel calls, on-disk response cache, latency/token/cost tracking |
-| 6. Scoring | JSON recovery, JSON-Schema validation, field/set metrics, sandboxed SQL execution |
-| 7. Ranking | Weighted composite, bootstrap 95% CIs, rank probabilities, Bradley–Terry ratings, tiers |
-| 8. Reporting | Leaderboard, task heatmap, cost-vs-quality Pareto chart, CSV/Markdown export |
+| Supervised | Linear Regression, Logistic Regression, Decision Tree, Random Forest, SVM, k-NN, Naive Bayes, Gradient Boosting, AdaBoost, XGBoost |
+| Unsupervised | k-Means, Hierarchical Clustering, DBSCAN, PCA, t-SNE, K-Means++, Isolation Forest |
+| Reinforcement learning | Q-Learning, SARSA, DQN, Policy Gradient, Actor-Critic, Markov Decision Process |
+| Deep learning | ANN, CNN, RNN, LSTM, Transformer, Autoencoder |
+| Evolutionary | Genetic Algorithm |
 
-Set provider keys before running, for example `ANTHROPIC_API_KEY`, or `OPENROUTER_API_KEY` with `OPENROUTER_MODELS="vendor/model-a,vendor/model-b"`. Module 4 has the full list. With no keys set, only the calibration baselines run, which checks the pipeline end to end.
+Models are ranked by a weighted composite with bootstrap 95% CIs, rank probabilities, Bradley–Terry ratings, and tiers. The notebook also reports per-family and per-module scores, a cost-vs-quality chart, and CSV/Markdown exports.
+
+Set provider keys before running, for example `ANTHROPIC_API_KEY`, or `OPENROUTER_API_KEY` with `OPENROUTER_MODELS="vendor/model-a,vendor/model-b"`. Section 4 of the notebook has the full list (OpenAI, Gemini, Groq, Together, Mistral, DeepSeek, xAI, Ollama). With no keys set, only the calibration baselines run, which checks the pipeline end to end.
