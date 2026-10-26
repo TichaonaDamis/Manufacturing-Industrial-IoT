@@ -117,3 +117,5 @@ We recommend deploying it immediately as the backbone of a proactive maintenance
 9. **Summary**: all 30 algorithms ranked within their stage.
 
 Set `FAST_MODE=1` for a quick run.
+
+**Running without internet access to UCI:** `data/ai4i2020_sample.csv` is an evaluation sample produced by `generate_ai4i_sample.py`, which re-implements the dataset's documented generation process (AI4I 2020 is itself synthetic). The notebook uses it automatically when the original file can't be downloaded, or always when `DATA_MODE=sample` is set. The sample has the same columns, value ranges and failure rules, but it is not the original file, so results on it evaluate the pipeline rather than the published data.

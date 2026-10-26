@@ -1,4 +1,5 @@
 .ipynb_checkpoints/
-data/
+data/*
+!data/ai4i2020_sample.csv
 models/
 results/
