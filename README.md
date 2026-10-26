@@ -99,3 +99,39 @@
 The model now differentiates risk across machine types, enabling targeted maintenance, reducing downtime, and lowering costs. 
 With minimal implementation effort, this model provides measurable operational and financial benefits.
 We recommend deploying it immediately as the backbone of a proactive maintenance strategy.”
+
+---
+
+## LLM Ranking: Structured Data Processing (30 ML Algorithm Modules)
+
+`LLM_Structured_Data_Ranking.ipynb` ranks LLMs on how accurately they carry out 30 core machine-learning algorithms by hand on structured data drawn from the same AI4I 2020 machine dataset. Each module generates small, fully specified problems. Reference answers come from scikit-learn or NumPy, so scoring is automatic.
+
+| Family | Modules |
+|---|---|
+| Supervised | Linear Regression, Logistic Regression, Decision Tree, Random Forest, SVM, k-NN, Naive Bayes, Gradient Boosting, AdaBoost, XGBoost |
+| Unsupervised | k-Means, Hierarchical Clustering, DBSCAN, PCA, t-SNE, K-Means++, Isolation Forest |
+| Reinforcement learning | Q-Learning, SARSA, DQN, Policy Gradient, Actor-Critic, Markov Decision Process |
+| Deep learning | ANN, CNN, RNN, LSTM, Transformer, Autoencoder |
+| Evolutionary | Genetic Algorithm |
+
+Models are ranked by a weighted composite with bootstrap 95% CIs, rank probabilities, Bradley–Terry ratings, and tiers. The notebook also reports per-family and per-module scores, a cost-vs-quality chart, and CSV/Markdown exports.
+
+Set provider keys before running, for example `ANTHROPIC_API_KEY`, or `OPENROUTER_API_KEY` with `OPENROUTER_MODELS="vendor/model-a,vendor/model-b"`. Section 4 of the notebook has the full list (OpenAI, Gemini, Groq, Together, Mistral, DeepSeek, xAI, Ollama). With no keys set, only the calibration baselines run, which checks the pipeline end to end.
+
+---
+
+## End-to-End ML Pipeline: 30 Algorithms on AI4I 2020
+
+`Manufacturing_ML_Pipeline_30_Algorithms.ipynb` downloads the free [AI4I 2020 Predictive Maintenance Dataset](https://archive.ics.uci.edu/dataset/601/ai4i+2020+predictive+maintenance+dataset) from UCI and applies every algorithm in a full ML workflow:
+
+1. **Data acquisition and EDA**: class balance, sensor distributions, correlations.
+2. **Data quality**: removes leakage (the failure-mode flags) and IDs, reviews outliers, and handles **missing values**. Simulated sensor drop-outs are filled by mean, median, KNN or iterative imputation, and the strategy is chosen by CV.
+3. **Feature engineering**: temperature gap, power, strain, and type-normalised strain, with an ablation test.
+4. **Dimensionality reduction and clustering**: PCA, t-SNE, k-Means vs K-Means++, Hierarchical, DBSCAN, each tuned.
+5. **Feature selection**: Genetic Algorithm.
+6. **Training and hyper-parameter tuning**: randomised search with 5-fold stratified CV for 19 candidate models. These include Linear/Logistic Regression, Decision Tree, Random Forest, SVM, k-NN, Naive Bayes, Gradient Boosting, AdaBoost, XGBoost, ANN, CNN, RNN, LSTM, Transformer, Autoencoder and Isolation Forest.
+7. **Validation and selection**: out-of-fold metrics, cost-optimal thresholds, and corrected paired t-tests. A selection rule fixed in advance picks the model, which is then evaluated once on a held-out test set and saved.
+8. **Maintenance policy optimisation**: MDP value iteration, Q-Learning, SARSA, DQN, Policy Gradient and Actor-Critic in a tool-replacement simulator built from the data.
+9. **Summary**: all 30 algorithms ranked within their stage.
+
+Set `FAST_MODE=1` for a quick run.
